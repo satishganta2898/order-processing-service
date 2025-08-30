@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
+@Tag(name = "Product", description = "Product management API's")
 public class ProductController {
 
     private final ProductService productService;
 
-    /** Endpoint to create new product **/
+    /** Endpoint to create new order **/
+    @Operation(summary = "Add new product", description = "Creates a product with given name and price")
+    @ApiResponse(responseCode = "200", description = "Product created successfully")
     @PostMapping(value = "/products", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductResponse addProduct(@RequestBody ProductRequest product) {
         log.info("Request received to add productDetails {}", product);

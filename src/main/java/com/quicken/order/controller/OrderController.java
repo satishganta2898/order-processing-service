@@ -15,11 +15,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequestMapping("/orders")
+@Tag(name = "Orders", description = "Order Processing APIs")
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
 
     /** Endpoint to create new order **/
+    @Operation(summary = "Create a new order", description = "Creates an order with the given product ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Order created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid product ID"),
+    })
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public OrderResponse createOrder(@RequestBody OrderRequest orderRequest) {
         log.info("Request received for create order: {}", orderRequest);
@@ -27,6 +33,8 @@ public class OrderController {
     }
 
     /** Endpoint to get order status by ID **/
+    @Operation(summary = "Get order status by ID", description = "Retrieve an order and its current status")
+    @ApiResponse(responseCode = "200", description = "Order found")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderResponse getOrderStatus(@PathVariable Long id) {
         log.info("Request received for get order status: {}", id);
