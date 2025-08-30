@@ -17,16 +17,16 @@ public class AsyncOrderProcessor {
 
     private final OrderRepository orderRepository;
     private final Random random = new Random();
-
+    /** Async method runs in separate thread to simulate order processing **/
     @Async
     public void processOrder(Order order) {
         try {
             log.info("Processing orderRequest{}", order);
             order.setStatus(OrderStatus.PROCESSING);
             orderRepository.save(order);
-
+            /* Simulated delay to mimic long-running process **/
             Thread.sleep(2000 + random.nextInt(1000));
-
+            /* Randomly assigning order status **/
             if (random.nextBoolean()) {
                 order.setStatus(OrderStatus.COMPLETED);
             } else {

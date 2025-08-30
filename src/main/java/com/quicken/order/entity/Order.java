@@ -17,9 +17,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    /** Foreign key to product entity **/
     private Long productId;
-
+    /** Enum for track order status lifeCycle **/
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 }

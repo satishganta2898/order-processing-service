@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
+    /* add the new product with given product name and price **/
     @Override
     public ProductResponse addProduct(ProductRequest productRequest) {
         log.info("Adding new product with name {}", productRequest.getName());
@@ -26,8 +27,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         log.info("Fetching product by id {}", id);
+        /* Fetch product from DB or throw if not found **/
         return productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("product doesn’t exist " + id));
     }
 
 }
