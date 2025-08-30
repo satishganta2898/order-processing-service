@@ -6,5 +6,5 @@ import com.quicken.order.dto.OrderResponse;
 public interface OrderService {
 
     OrderResponse createOrder(OrderRequest orderRequest);
-    OrderResponse getOrderById(Long id);
+    OrderResponse getOrderStatus(Long id);
 }

@@ -15,13 +15,11 @@ public class OrderResponse {
 
     private Long orderId;
     private OrderStatus orderStatus;
-    private Long productId;
 
     public static OrderResponse fromEntity(Order order) {
         return OrderResponse.builder()
                 .orderId(order.getId())
                 .orderStatus(order.getStatus())
-                .productId(order.getProductId())
                 .build();
     }
 }
